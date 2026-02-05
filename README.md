@@ -1,16 +1,50 @@
-# React + Vite
+# React MyContext for Stateless Data.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A quick-start guide to scaffolding a React-Vite project and implementing a basic "Stateless" MyContext MyProvider-Consumer relationship.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## To run the app:
+```bash
+cd reactMyContextStateless
+yarn install
+yarn dev
+```
 
-## React Compiler
+## To build from scratch start a new Vite-React project:
+```bash
+cd tutorials
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+yarn create vite reactMyContextStateless --template react
+cd reactMyContextStateless
+```
 
-## Expanding the ESLint configuration
+## Initiate version control:
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -m master main
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Upload to GitHub:
+```bash
+gh auth status
+gh repo create reactMyContextStateless --public --source=. --remote=origin --push
+```
+
+## Open in editor (optional):
+```bash
+code
+```
+
+## Create static context consuming React component:
+```bash
+cd src
+code MyComponent.jsx
+```
+
+### Static(stateless) myData source:
