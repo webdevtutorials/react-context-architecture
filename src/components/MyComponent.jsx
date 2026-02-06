@@ -1,11 +1,13 @@
 // src / components / MyComponent.jsx
 
 import { useEffect } from 'react';
-import useMyContext from '../features/myFeature/context/MyContext.js';
+import useMyContext from '../features/myFeature/context/MyContext';
 
 function MyComponent() {
     const { staticData, dynamicData, setDynamicData } = useMyContext();
 
+    // Implementing useEffect will prevent infinite loop from updating the
+    // outside state
     useEffect(() => {
         setDynamicData("Stateful");
     }, [setDynamicData]);

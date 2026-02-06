@@ -2,17 +2,19 @@
 
 import { createContext, useContext } from 'react';
 
-const MyContext = createContext(null);
+const StatelessContext = createContext(null);
+const StatefulContext = createContext(null);
 
 const useMyContext = () => {
-    const context = useContext(MyContext);
+    const statelessValue = useContext(StatelessContext);
+    const statefulValue = useContext(StatefulContext);
 
-    if (!context) {
+    if (statelessValue === null || statefulValue === null) {
         throw new Error("useContext must be used within a provider");
     }
 
-    return context;
+    return { ...statelessValue, ...statefulValue };
 };
 
 export default useMyContext;
-export { MyContext };
+export { StatelessContext, StatefulContext };

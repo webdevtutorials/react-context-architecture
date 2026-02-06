@@ -47,11 +47,11 @@ cd src
 code MyComponent.jsx
 ```
 
-### Static(stateless) data:
-Static data is sourced from src/myData/staticData.js
+### Static (stateless) data:
+- Static data is located in src/myData/staticData.js
 
 ### Context
-React context is isolated in src/features/myFeature/context/MyContext.js
+- React context is isolated in src/features/myFeature/context/MyContext.js
 
 - Context:
 ```js const MyContext = createContext(null) ```
@@ -70,9 +70,9 @@ const useMyContext = () => {
 ```
 
 ### Provider & dynamic data:
-Provider is located in the same folder as context, src/features/myFeature/context/MyProvider.js
-Dynamic (stateful) data cannot be imported, it must be originated inside the provider (provider owns state).
-It's important to use **useMemo()** React hook to stabilize the provider to avoid unnessesary consumer re-renders every time the provider re-renders.
+- Provider and context live in the same folder src/features/myFeature/context/MyProvider.js.
+- Dynamic (stateful) data cannot be imported, it must be originated inside the provider (provider owns state).
+- It's important to use **useMemo()** React hook to stabilize the provider to avoid consumer re-renders every time provider re-renders.
 
 ```js
 const MyProvider = ({ children }) => {
@@ -95,7 +95,7 @@ export default MyProvider;
 ```
 
 ### AppProviders - aggregating multiple providers:
-AppProviders.jsx is located in src/providers/AppProviders.jsx
+- AppProviders.jsx is located in src/providers/AppProviders.jsx
 
 ```js
 const AppProviders = ({ children }) => (
@@ -108,7 +108,7 @@ export default AppProviders;
 ```
 
 ### Wrapping consumers:
-The wrapping takes place in main.jsx (index.jsx)
+- The wrapping takes place in main.jsx (index.jsx)
 
 ```js
 createRoot(document.getElementById('root')).render(
@@ -121,8 +121,8 @@ createRoot(document.getElementById('root')).render(
 ```
 
 ### Consuming:
-Consuming is streamlined using custom hook inside MyComponent. useEffect should be used
-to update dynamic data to avoid infinite loop and crush.
+- Consuming is streamlined using custom hook inside MyComponent.
+- useEffect should be used to update dynamic data to avoid infinite loop and crush.
 
 ```jsx
 function MyComponent() {
@@ -145,7 +145,7 @@ function MyComponent() {
 
 
 
-2. Wrap Consumer Components in React.memo
+Wrap Consumer Components in React.memo
 You can pass the context data into a sub-component as a prop and wrap that sub-component in memo.
 
 JavaScript
