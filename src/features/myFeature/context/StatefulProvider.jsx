@@ -1,7 +1,7 @@
 // src / features / feature / context / StatefulProvider.jsx
 
 import { useState, useMemo } from 'react';
-import { StatefulContext } from './MyContext';
+import StatefulContext from './StatefulContext';
 
 const StatefulProvider = ({ children }) => {
     const [dynamicData, setDynamicData] = useState("No data");
@@ -11,7 +11,7 @@ const StatefulProvider = ({ children }) => {
     const contextValue = useMemo(() => ({
             dynamicData,
             setDynamicData
-    }), [dynamicData, setDynamicData]);
+    }), [dynamicData]);
 
     return (
         <StatefulContext.Provider value={contextValue}>
