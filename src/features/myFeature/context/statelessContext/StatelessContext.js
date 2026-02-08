@@ -12,5 +12,4 @@ const useStatelessContext = () => {
 };
 
 export default StatelessContext;
-
 export { useStatelessContext };

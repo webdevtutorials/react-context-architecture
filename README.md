@@ -52,58 +52,101 @@ code MyComponent.jsx
 ### Static (stateless) data:
 - Static data is located in src/myData/staticData.js
 
-### Context
-- React context is isolated in src/features/myFeature/context/MyContext.js
+### Context and access hook:
+- Contexts are located alongside their respective providers in the folders statelessContext/ and statefulContext/ in src/features/myFeature/context/
 
-- Context:
-```js const MyContext = createContext(null) ```
-
-- Hook to use in consumers:
 ```js 
-const useMyContext = () => {
-    const context = useContext(MyContext);
+    import { createContext, useContext } from 'react';
 
-    if (!context) {
-        throw new Error("useContext must be used inside a provider");
-    }
+    const StatelessContext = createContext(undefined);
 
-    return context;
-};
+    const useStatelessContext = () => {
+        const context = useContext(StatelessContext);
+        if (context === undefined) throw new Error("useStatelessContext must be used within StatelessProvider");
+
+        return context;
+    };
+
+    export default StatelessContext;
+    export { useStatelessContext };
 ```
 
-### Providers & dynamic data:
+```js
+    import { createContext, useContext } from 'react';
+
+    const StatefulContext = createContext(undefined);
+
+    const useStatefulContext = () => {
+        const context = useContext(StatefulContext);
+        if (context === undefined) throw new Error("useStatefulContext must be used within StatefulProvider");
+
+        return context;
+    };
+
+    export default StatefulContext;
+    export { useStatefulContext };
+```
+
+### Providers:
 - Provider and context live in the same folder src/features/myFeature/context/MyProvider.js.
-- Dynamic (stateful) data cannot be imported, it must be originated inside the provider (provider owns state).
-- It's important to use **useMemo()** React hook to stabilize the provider to avoid consumer re-renders every time provider re-renders.
 
 ```js
-const MyProvider = ({ children }) => {
-    const [dynamicData, setDynamicData] = useState("No data");
-    
-    const contextValue = useMemo(() => ({
-            staticData,
-            dynamicData,
-            setDynamicData
-    }), [dynamicData]);
+import StatelessContext from './StatelessContext';
+import staticData from '../../../../myData/staticData';
+
+const CONTEXT_VALUE = { staticData };
+
+const StatelessProvider = ({ children }) => {
 
     return (
-        <MyContext.Provider value={contextValue}>
-            { children }
-        </MyContext.Provider>
+        <StatelessContext.Provider value={ CONTEXT_VALUE }>
+            {children}
+        </StatelessContext.Provider>
     );
 };
 
-export default MyProvider;
+export default StatelessProvider;
+```
+
+### Dynamic data:
+- Dynamic (stateful) data cannot be imported, it must be originated inside the provider (provider owns state).
+- memoizing the object prevents consumers from re-rendering unless the data actually changes
+
+```js
+    import { useState, useMemo } from 'react';
+    import StatefulContext from './StatefulContext';
+
+    const StatefulProvider = ({ children }) => {
+        const [dynamicData, setDynamicData] = useState("No data");
+        
+        const contextValue = useMemo(() => ({
+                dynamicData,
+                setDynamicData
+        }), [dynamicData]);
+
+        return (
+            <StatefulContext.Provider value={contextValue}>
+                { children }
+            </StatefulContext.Provider>
+        );
+    };
+
+    export default StatefulProvider;
 ```
 
 ### AppProviders - aggregating multiple providers:
 - AppProviders.jsx is located in src/providers/AppProviders.jsx
 
 ```js
+import StatelessProvider from '../features/myFeature/context/statelessContext/StatelessProvider';
+import StatefulProvider from '../features/myFeature/context/statefulContext/StatefulProvider';
+
 const AppProviders = ({ children }) => (
-    <MyProvider>
-        { children }
-    </MyProvider>
+    <StatelessProvider>
+        <StatefulProvider>
+            {children}
+        </StatefulProvider>
+    </StatelessProvider>
 );
 
 export default AppProviders;
@@ -124,12 +167,17 @@ createRoot(document.getElementById('root')).render(
 
 ### Consuming:
 - Consuming is streamlined using custom hook inside MyComponent.
-- useEffect should be used to update dynamic data to avoid infinite loop and crush.
+- useEffect prevents infinite loop.
 
-```jsx
+```js
+import { useEffect } from 'react';
+import { useStatelessContext } from '../features/myFeature/context/statelessContext/StatelessContext';
+import { useStatefulContext } from '../features/myFeature/context/statefulContext/StatefulContext';
+
 function MyComponent() {
-    const { staticData, dynamicData, setDynamicData } = useMyContext();
-
+    const { staticData } = useStatelessContext();
+    const { dynamicData, setDynamicData } = useStatefulContext();
+op
     useEffect(() => {
         setDynamicData("Stateful");
     }, [setDynamicData]);
@@ -142,6 +190,8 @@ function MyComponent() {
         </div>
     );
 };
+
+export default MyComponent;
 ```
 
 
