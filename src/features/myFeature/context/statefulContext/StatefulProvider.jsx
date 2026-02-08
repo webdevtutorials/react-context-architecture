@@ -1,4 +1,4 @@
-// src / features / feature / context / StatefulProvider.jsx
+// src / features / feature / context / statefulContext / StatefulProvider.jsx
 
 import { useState, useMemo } from 'react';
 import StatefulContext from './StatefulContext';

@@ -1,7 +1,7 @@
 // src / providers / AppProviders.jsx
 
-import StatelessProvider from '../features/myFeature/context/StatelessProvider';
-import StatefulProvider from '../features/myFeature/context/StatefulProvider';
+import StatelessProvider from '../features/myFeature/context/statelessContext/StatelessProvider';
+import StatefulProvider from '../features/myFeature/context/statefulContext/StatefulProvider';
 
 const AppProviders = ({ children }) => (
     <StatelessProvider>

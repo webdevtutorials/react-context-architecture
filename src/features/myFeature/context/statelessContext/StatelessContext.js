@@ -1,4 +1,4 @@
-// src / features / myFeature / context / StatelessContext.js
+// src / features / myFeature / context / statelessContext / StatelessContext.js
 
 import { createContext, useContext } from 'react';
 

@@ -1,15 +1,14 @@
 // src / components / MyComponent.jsx
 
 import { useEffect } from 'react';
-import { useStatelessContext } from '../features/myFeature/context/StatelessContext';
-import { useStatefulContext } from '../features/myFeature/context/StatefulContext';
+import { useStatelessContext } from '../features/myFeature/context/statelessContext/StatelessContext';
+import { useStatefulContext } from '../features/myFeature/context/statefulContext/StatefulContext';
 
 function MyComponent() {
     const { staticData } = useStatelessContext();
     const { dynamicData, setDynamicData } = useStatefulContext();
 
-    // Implementing useEffect will prevent infinite loop from updating the
-    // outside state
+    // useEffect prevents infinite loop
     useEffect(() => {
         setDynamicData("Stateful");
     }, [setDynamicData]);
