@@ -3,9 +3,8 @@
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 
-A quick-start guide to scaffolding a React-Vite project and implementing 
-react context architecturewith with nesting providers. This architeture
-designed to imitate how the structure might look like in a larger scale app.
+A quick-start guide to scaffolding a React-Vite project and using
+**React Context** with with nesting providers. The tutorial imitates an implementation in a large scale app.
 
 ---
 
@@ -88,7 +87,7 @@ code MyComponent.jsx
 ```
 
 ### Providers:
-- Provider and context live in the same folder src/features/myFeature/context/MyProvider.js.
+- Provider and context live in the same folder src/features/myFeature/context/statelessContext.js or ...statefulContext.js.
 
 ```js
 import StatelessContext from './StatelessContext';
@@ -109,8 +108,8 @@ export default StatelessProvider;
 ```
 
 ### Dynamic data:
-- Dynamic (stateful) data cannot be imported, it must be originated inside the provider (provider owns state).
-- memoizing the object prevents consumers from re-rendering unless the data actually changes
+- Dynamic (stateful) data must be originated inside the provider (provider owns state), it cannot be imported.
+- Memoizing the object prevents consumers from re-rendering unless the data actually changes
 
 ```js
     import { useState, useMemo } from 'react';
@@ -177,7 +176,7 @@ import { useStatefulContext } from '../features/myFeature/context/statefulContex
 function MyComponent() {
     const { staticData } = useStatelessContext();
     const { dynamicData, setDynamicData } = useStatefulContext();
-op
+
     useEffect(() => {
         setDynamicData("Stateful");
     }, [setDynamicData]);
@@ -193,22 +192,3 @@ op
 
 export default MyComponent;
 ```
-
-
-
-
-Wrap Consumer Components in React.memo
-You can pass the context data into a sub-component as a prop and wrap that sub-component in memo.
-
-JavaScript
-const Consumer = () => {
-  const { staticData } = useContext(MyContext);
-  return <ExpensiveComponent data={staticData} />;
-};
-
-// Only re-renders if props actually change
-const ExpensiveComponent = React.memo(({ data }) => {
-  return <div>{data}</div>;
-});
-3. Use a 3rd-Party State Manager
-If your context object grows very large and has many different pieces of data, tools like Zustand or Recoil allow for "selectors," which let components subscribe to specific values without re-rendering when other values change.
