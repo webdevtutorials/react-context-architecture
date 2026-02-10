@@ -19,8 +19,8 @@ yarn dev
 ```bash
 cd tutorials
 
-yarn create vite reactMyContextStateless --template react
-cd reactMyContextStateless
+yarn create vite react-context-architecture --template react
+cd react-context-stateless
 ```
 
 ## Initiate version control:
@@ -34,7 +34,7 @@ git branch -m master main
 ## Upload to GitHub:
 ```bash
 gh auth status
-gh repo create reactMyContextStateless --public --source=. --remote=origin --push
+gh repo create react-context-architecture --public --source=. --remote=origin --push
 ```
 
 ## Open in editor (optional):
