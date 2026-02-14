@@ -4,7 +4,7 @@
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 
 A quick-start guide to scaffolding a React-Vite project and using
-**React Context** with with nesting providers. The tutorial imitates an implementation in a large scale app.
+**React Context API** with with nesting providers in a large scale app.
 
 ---
 
