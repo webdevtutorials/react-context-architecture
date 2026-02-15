@@ -7,7 +7,8 @@ const StatefulProvider = ({ children }) => {
     const [dynamicData, setDynamicData] = useState("No data");
     
     // memoizing the object prevents consumers from re-rendering
-    // unless the data actually changes
+    // unless the data actually changes because contextValue is 
+    // an object, recreated on every render
     const contextValue = useMemo(() => ({
             dynamicData,
             setDynamicData
